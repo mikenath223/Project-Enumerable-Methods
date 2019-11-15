@@ -98,11 +98,9 @@ module Enumerable
     [arg1, arg2, arr]
   end
 
-  def multiply_els; end
-
-  def my_map_with_proc; end
-
-  def my_map_proc_or_block; end
+  def multiply_els(arr)
+    arr.inject(1) { |memo, vals| memo * vals }
+  end
 
   def check_validity(entry, param)
     return entry.is_a(param) if param.is_a? Class
@@ -114,8 +112,4 @@ module Enumerable
     end
     (entry == param)
   end
-
-  # def verify_input(init)
-  #   start = init.nil? ? 1 : 0
-  # end
 end
