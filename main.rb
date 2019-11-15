@@ -19,7 +19,7 @@ module Enumerable
     entry = is_a(Range) ? to_a : self
     i = 0
     while i < size
-      yield(entry[i])
+      yield(entry[i], i)
       i += 1
     end
     entry
@@ -33,7 +33,19 @@ module Enumerable
     arr_new
   end
 
-  def my_all?; end
+  def my_all?(arg = nil)
+    if block_given?
+      my_each { |elem| return false unless yield(elem) }
+      true
+    end
+    if arg.nil?
+      my_each { |elem| return false unless elem }
+      return true
+    end
+
+    my_each { |elem| return false unless check_validity(elem, arg) }
+    true
+  end
 
   def my_any?; end
 
@@ -50,4 +62,19 @@ module Enumerable
   def my_map_with_proc; end
 
   def my_map_proc_or_block; end
+
+  def check_validity(entry, param)
+    return entry.is_a(param) if param.is_a? Class
+
+    if param.is_a? Regexp
+      return false if input.is_a?(Numeric)
+
+      return param.match(input)
+    end
+    (entry == param)
+  end
+
+  # def verify_input(init)
+  #   start = init.nil? ? 1 : 0
+  # end
 end
