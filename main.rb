@@ -56,7 +56,9 @@ module Enumerable
     false
   end
 
-  def my_none?; end
+  def my_none?(pattern = nil, &proc)
+    !my_any?(pattern, &proc)
+  end
 
   def my_count; end
 
