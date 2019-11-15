@@ -72,7 +72,17 @@ module Enumerable
     count
   end
 
-  def my_map; end
+  def my_map(block = nil)
+    return to_enum unless block_given?
+
+    arr = []
+    if block
+      my_each_with_index { |elem, i| arr[i] = block.call(elem) }
+    else
+      my_each_with_index { |elem, i| arr[i] = yield(elem) }
+    end
+    arr
+  end
 
   def my_inject; end
 
