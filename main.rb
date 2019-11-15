@@ -25,7 +25,13 @@ module Enumerable
     entry
   end
 
-  def my_select; end
+  def my_select
+    return to_enum unless block_given?
+
+    arr_new = []
+    my_each { |elem| arr_new << elem if yield(elem) }
+    arr_new
+  end
 
   def my_all?; end
 
