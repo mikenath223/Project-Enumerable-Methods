@@ -60,7 +60,17 @@ module Enumerable
     !my_any?(pattern, &proc)
   end
 
-  def my_count; end
+  def my_count(num = nil)
+    count = 0
+    if num
+      my_each { |elem| count += 1 if elem == num }
+    elsif block_given?
+      my_each { |elem| count += 1 if yield(elem) }
+    else
+      count = length
+    end
+    count
+  end
 
   def my_map; end
 
