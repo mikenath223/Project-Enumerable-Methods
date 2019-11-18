@@ -16,7 +16,7 @@ module Enumerable
   def my_each_with_index
     return to_enum unless block_given?
 
-    entry = is_a(Range) ? to_a : self
+    entry = is_a?(Range) ? to_a : self
     i = 0
     while i < size
       yield(entry[i], i)
@@ -36,22 +36,21 @@ module Enumerable
   def my_all?(arg = nil)
     if block_given?
       my_each { |elem| return false unless yield(elem) }
-      true
+      return true
     end
     if arg.nil?
       my_each { |elem| return false unless elem }
       return true
     end
-
     my_each { |elem| return false unless check_validity(elem, arg) }
     true
   end
 
   def my_any?(arg = nil, &proc)
     if block_given?
-      my_each { |elem| return true if proc.nil ? proc.call(elem) : yield(elem) }
+      my_each { |elem| return true if proc.nil? ? proc.call(elem) : yield(elem) }
     else
-      my_each { |elem| return true if arg.nil ? elem : check_validity(elem, arg) }
+      my_each { |elem| return true if arg.nil? ? elem : check_validity(elem, arg) }
     end
     false
   end
@@ -103,9 +102,9 @@ module Enumerable
   end
 
   def check_validity(entry, param)
-    return entry.is_a(param) if param.is_a? Class
+    return entry.is_a?(param) if param.is_a?(Class)
 
-    if param.is_a? Regexp
+    if param.is_a?(Regexp)
       return false if input.is_a?(Numeric)
 
       return param.match(input)
