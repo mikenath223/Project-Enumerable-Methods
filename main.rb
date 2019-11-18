@@ -36,7 +36,6 @@ module Enumerable
   def my_all?(arg = nil)
     if block_given?
       my_each { |elem| return false unless yield(elem) }
-      return true
     end
     if arg.nil?
       my_each { |elem| return false unless elem }
