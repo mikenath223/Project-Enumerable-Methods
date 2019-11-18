@@ -104,9 +104,9 @@ module Enumerable
     return entry.is_a?(param) if param.is_a?(Class)
 
     if param.is_a?(Regexp)
-      return false if input.is_a?(Numeric)
+      return false if entry.is_a?(Numeric)
 
-      return param.match(input)
+      return param.match(entry)
     end
     (entry == param)
   end
