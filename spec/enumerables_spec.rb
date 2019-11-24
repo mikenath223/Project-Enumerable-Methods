@@ -50,3 +50,23 @@ RSpec.describe Enumerable do
     end
   end
 
+  describe '#my_select' do
+    context 'If no block returns to enum like #select' do
+      it do
+        expect(test_arr1.select).to be_an(Enumerator)
+      end
+    end
+    context 'Test1: Selects elements like #select' do
+      it do
+        test = test_arr1.select(&:odd?)
+        expect(test_arr1.my_select(&:odd?))
+      end
+    end
+    context 'Test2: Selects elements like #select' do
+      it do
+        test = test_arr3.select{ |num| num.to_f > 32.1 }
+        expect(test_arr3.my_select{ |num| num.to_f > 32.1 }).to eq(test)
+      end
+    end
+  end
+
