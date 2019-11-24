@@ -131,3 +131,17 @@ RSpec.describe Enumerable do
     end
   end
 
+  describe '#my_none' do
+    context 'Returns to false like #none if no block' do
+      it 'should equal false' do
+        expect(test_arr1.my_none?).to be_falsy
+      end
+    end
+    context 'String: is identical to none with strings' do
+      it do
+        test = test_arr2.none? { |n| n.is_a? String}
+        expect(test_arr2.my_none? { |n| n.is_a? String}).to eq(test)
+      end
+    end
+  end
+end
