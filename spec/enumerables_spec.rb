@@ -150,4 +150,12 @@ RSpec.describe Enumerable do
       expect(test_arr1.my_none? { |n| n.is_a? Integer }).to eq(test)
     end
   end
+
+  describe '#my_count' do
+    context 'runs no block similar to #count' do
+      it do
+        expect(array_of_integers_and_strings.my_count).to eq(9)
+      end
+    end
+  end
 end
