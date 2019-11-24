@@ -157,5 +157,10 @@ RSpec.describe Enumerable do
         expect(array_of_integers_and_strings.my_count).to eq(9)
       end
     end
+    context 'is identical to #count using parameter' do
+      it do
+        expect(test_arr1.count(34)).to eq(1)
+      end
+    end
   end
 end
