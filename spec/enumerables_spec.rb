@@ -162,5 +162,10 @@ RSpec.describe Enumerable do
         expect(test_arr1.count(34)).to eq(1)
       end
     end
+    context 'identical to #count when block is given' do
+      it do
+        expect(test_arr3.my)
+      end
+    end
   end
 end
