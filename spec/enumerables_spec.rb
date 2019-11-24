@@ -195,7 +195,11 @@ RSpec.describe Enumerable do
         test = test_arr1.inject { |n1, n2| n1 + n2 }
         expect(test_arr1.my_inject { |n1, n2| n1 + n2}).to eq(test)
       end
-
+      it 'passing a proc' do
+        block = proc { |num1, num2| num1 + num2 }
+        test = test_arr1.inject(&block)
+        expect(test_arr1.my_inject(&block)).to eq(test)
+      end
     end
   end
 end
