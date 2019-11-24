@@ -139,9 +139,15 @@ RSpec.describe Enumerable do
     end
     context 'String: is identical to none with strings' do
       it do
-        test = test_arr2.none? { |n| n.is_a? String}
-        expect(test_arr2.my_none? { |n| n.is_a? String}).to eq(test)
+        test = test_arr2.none? { |n| n.is_a? String }
+        expect(test_arr2.my_none? { |n| n.is_a? String }).to eq(test)
       end
+    end
+  end
+  context 'Integers: is identical to none with integers' do
+    it do
+      test = test_arr1.none? { |n| n.is_a? Integer }
+      expect(test_arr1.my_none? { |n| n.is_a? Integer }).to eq(test)
     end
   end
 end
