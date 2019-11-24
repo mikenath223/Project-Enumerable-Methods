@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require './main.rb'
 
 RSpec.describe Enumerable do
   let(:test_arr1) { [34, 100, 1, 3, 5] }
-  let(:test_arr2) { ['Rick', 'Ricky', 'Buck', 'James'] }
+  let(:test_arr2) { %w[Rick Ricky Buck James] }
   let(:test_arr3) { [34.5, 17.8, 56.8, 32.1] }
-  let(:mixed_array) { [1,2,3, 'horse', 'sheep', 'cows', :sym, (1..10), { name: 'michgolden', job: 'software engineer' }] }
-  let(:array_strings) { %w(foo bar) }
+  let(:mixed_array) { [1, 2, 3, :sym, (1..10), { name: 'michgolden', job: 'software engineer' }] }
+  let(:array_strings) { %w[foo bar] }
   let(:array_of_integers_and_strings) { test_arr1 + test_arr2 }
   let(:array_nils) { [nils, nils, nils] }
   let(:array_one_nil) { [1, nil, 5] }
@@ -22,8 +24,8 @@ RSpec.describe Enumerable do
 
     context 'Expect to run a block like #each' do
       it do
-        test = test_arr1.each {|num| num * 2}
-        expect(test_arr1.my_each {|num| num * 2}).to eq(test)
+        test = test_arr1.each { |num| p num * 2 }
+        expect(test_arr1.my_each { |num| p num * 2 }).to eq(test)
       end
     end
   end
@@ -34,18 +36,18 @@ RSpec.describe Enumerable do
         expect(test_arr1.my_each_with_index).to be_an(Enumerator)
       end
     end
-  
+
     context 'Expect to run a block like #each_with_index' do
       it do
-        test = test_arr1.each_with_index {|num, ind| num + ind}
-        expect(test_arr1.my_each_with_index {|num, ind| num + ind})
+        test = test_arr1.each_with_index { |num, ind| num + ind }
+        expect(test_arr1.my_each_with_index { |num, ind| num + ind }).to eq(test)
       end
     end
 
     context 'Expect to run a string like #each_with_index' do
       it do
-        test = test_arr2.each_with_index { |name, ind| "Name: #{name}, Index: #{ind}"}
-        expect(test_arr2.my_each_with_index { |name, ind| "Name: #{name}, Index: #{ind}"}).to eq(test)
+        test = test_arr2.each_with_index { |name, ind| "Name: #{name}, Index: #{ind}" }
+        expect(test_arr2.my_each_with_index { |name, ind| "Name: #{name}, Index: #{ind}" }).to eq(test)
       end
     end
   end
@@ -59,13 +61,13 @@ RSpec.describe Enumerable do
     context 'Test1: Selects elements like #select' do
       it do
         test = test_arr1.select(&:odd?)
-        expect(test_arr1.my_select(&:odd?))
+        expect(test_arr1.my_select(&:odd?)).to eq(test)
       end
     end
     context 'Test2: Selects elements like #select' do
       it do
-        test = test_arr3.select{ |num| num.to_f > 32.1 }
-        expect(test_arr3.my_select{ |num| num.to_f > 32.1 }).to eq(test)
+        test = test_arr3.select { |num| num.to_f > 32.1 }
+        expect(test_arr3.my_select { |num| num.to_f > 32.1 }).to eq(test)
       end
     end
   end
@@ -73,19 +75,19 @@ RSpec.describe Enumerable do
   describe '#my_all' do
     context 'If no block runs like #all' do
       it do
-        expect(test_arr1.my_all?).to be_truthy 
+        expect(test_arr1.my_all?).to be_truthy
       end
     end
     context 'Integers: is identical to #all with integers' do
       it do
-        test = test_arr1.all? {|n| n.is_a? Integer}
-        expect(test_arr1.my_all?{ |n| n.is_a? Integer}).to eq(test)
+        test = test_arr1.all? { |n| n.is_a? Integer }
+        expect(test_arr1.my_all? { |n| n.is_a? Integer }).to eq(test)
       end
     end
     context 'Strings: is identical to #all with strings' do
       it do
         test = test_arr2.all? { |n| n.is_a? String }
-        expect(test_arr2.my_all?{ |n| n.is_a? String }).to eq(test)
+        expect(test_arr2.my_all? { |n| n.is_a? String }).to eq(test)
       end
     end
     context 'Regex 1: all strings match' do
@@ -93,7 +95,7 @@ RSpec.describe Enumerable do
         expect(test_arr2.my_all?(/\w+/)).to be_truthy
       end
     end
-    context 'Regex 2: one or more strings don\'t match' do 
+    context 'Regex 2: one or more strings don\'t match' do
       it 'should return false' do
         expect(array_of_integers_and_strings.my_all?(/\d+/)).to be_falsy
       end
@@ -183,7 +185,7 @@ RSpec.describe Enumerable do
     end
     context 'runs a proc like #map' do
       it do
-        block = proc {|key, val| val = 'Michgolden Ukeje'}
+        block = proc { |_key, _val| _val = 'Michgolden Ukeje' }
         expect(hash.my_map(&block)).to eq(['Michgolden Ukeje'])
       end
     end
@@ -193,7 +195,7 @@ RSpec.describe Enumerable do
     context 'runs like #inject' do
       it 'using block, no proc' do
         test = test_arr1.inject { |n1, n2| n1 + n2 }
-        expect(test_arr1.my_inject { |n1, n2| n1 + n2}).to eq(test)
+        expect(test_arr1.my_inject { |n1, n2| n1 + n2 }).to eq(test)
       end
       it 'passing a proc' do
         block = proc { |num1, num2| num1 + num2 }
@@ -210,7 +212,7 @@ RSpec.describe Enumerable do
       end
       it 'using block and an argument' do
         test = range.inject(4) { |num1, num2| num1 + num2 }
-        expect(range.my_inject(4) { |num1, num2| num1 + num2 })
+        expect(range.my_inject(4) { |num1, num2| num1 + num2 }).to eq(test)
       end
     end
   end
