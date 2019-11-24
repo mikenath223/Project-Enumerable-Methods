@@ -189,6 +189,13 @@ RSpec.describe Enumerable do
     end
   end
 
+  describe '#my_inject' do
+    context 'runs like #inject' do
+      it 'using block, no proc' do
+        test = test_arr1.inject { |n1, n2| n1 + n2 }
+        expect(test_arr1.my_inject { |n1, n2| n1 + n2}).to eq(test)
+      end
 
+    end
   end
 end
