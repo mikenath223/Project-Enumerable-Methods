@@ -204,6 +204,10 @@ RSpec.describe Enumerable do
         test = test_arr2.inject(:+)
         expect(test_arr2.my_inject(:+)).to eq(test)
       end
+      it 'using two arguments' do
+        test = range.inject(2, :*)
+        expect(range.my_inject(2, :*)).to eq(test)
+      end
     end
   end
 end
