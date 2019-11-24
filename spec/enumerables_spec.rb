@@ -9,7 +9,7 @@ RSpec.describe Enumerable do
   let(:array_of_integers_and_strings) { test_arr1 + test_arr2 }
   let(:array_nils) { [nils, nils, nils] }
   let(:array_one_nil) { [1, nil, 5] }
-  let(:hash) { { name: 'Michgolden', job: 'developer' } }
+  let(:hash) { { name: 'Michgolden' } }
   let(:hash_of_strings) { { 'name' => 'michgolden', 'school' => 'Microverse', 'skill' => 'Full stack dev' } }
   let(:range) { (1..20) }
 
@@ -181,5 +181,14 @@ RSpec.describe Enumerable do
         expect(test_arr1.my_map { |n| n * 2 }).to eq(test)
       end
     end
+    context 'runs a proc like #map' do
+      it do
+        block = proc {|key, val| val = 'Michgolden Ukeje'}
+        expect(hash.my_map(&block)).to eq(['Michgolden Ukeje'])
+      end
+    end
+  end
+
+
   end
 end
