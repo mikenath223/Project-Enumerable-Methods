@@ -159,12 +159,12 @@ RSpec.describe Enumerable do
     end
     context 'is identical to #count using parameter' do
       it do
-        expect(test_arr1.count(34)).to eq(1)
+        expect(test_arr1.my_count(34)).to eq(1)
       end
     end
     context 'identical to #count when block is given' do
       it do
-        expect(test_arr3.my)
+        expect(test_arr3.my_count { |n| n > 32.1 }).to eq(2)
       end
     end
   end
