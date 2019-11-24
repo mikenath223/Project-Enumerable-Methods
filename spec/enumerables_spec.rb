@@ -200,6 +200,10 @@ RSpec.describe Enumerable do
         test = test_arr1.inject(&block)
         expect(test_arr1.my_inject(&block)).to eq(test)
       end
+      it 'accepts a sym' do
+        test = test_arr2.inject(:+)
+        expect(test_arr2.my_inject(:+)).to eq(test)
+      end
     end
   end
 end
