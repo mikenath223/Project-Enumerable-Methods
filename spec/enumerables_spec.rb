@@ -70,3 +70,38 @@ RSpec.describe Enumerable do
     end
   end
 
+  describe '#my_all' do
+    context 'If no block runs like #all' do
+      it do
+        expect(test_arr1.my_all?).to be_truthy 
+      end
+    end
+    context 'Integers: is identical to #all with integers' do
+      it do
+        test = test_arr1.all? {|n| n.is_a? Integer}
+        expect(test_arr1.my_all?{ |n| n.is_a? Integer}).to eq(test)
+      end
+    end
+    context 'Strings: is identical to #all with strings' do
+      it do
+        test = test_arr2.all? { |n| n.is_a? String }
+        expect(test_arr2.my_all?{ |n| n.is_a? String }).to eq(test)
+      end
+    end
+    context 'Regex 1: all strings match' do
+      it 'should return true' do
+        expect(test_arr2.my_all?(/\w+/)).to be_truthy
+      end
+    end
+    context 'Regex 2: one or more strings don\'t match' do 
+      it 'should return false' do
+        expect(array_of_integers_and_strings.my_all?(/\d+/)).to be_falsy
+      end
+    end
+    context 'Regex 3: no element is a string' do
+      it 'should return false' do
+        expect(test_arr1.my_all?(/\w+/)).to be_falsy
+      end
+    end
+  end
+
