@@ -168,4 +168,12 @@ RSpec.describe Enumerable do
       end
     end
   end
+
+  describe '#my_map' do
+    context 'runs no block same as #map' do
+      it do
+        expect(test_arr1.my_map).to be_an(Enumerator)
+      end
+    end
+  end
 end
