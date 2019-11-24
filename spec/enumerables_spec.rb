@@ -208,6 +208,10 @@ RSpec.describe Enumerable do
         test = range.inject(2, :*)
         expect(range.my_inject(2, :*)).to eq(test)
       end
+      it 'using block and an argument' do
+        test = range.inject(4) { |num1, num2| num1 + num2 }
+        expect(range.my_inject(4) { |num1, num2| num1 + num2 })
+      end
     end
   end
 end
