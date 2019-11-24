@@ -105,3 +105,29 @@ RSpec.describe Enumerable do
     end
   end
 
+  describe '#my_any' do
+    context 'Runs no block given like #any' do
+      it do
+        expect(test_arr1.my_any?).to be_truthy
+      end
+    end
+    context 'String: is identical to #any with strings' do
+      it do
+        test = test_arr2.any? { |n| n.is_a? String }
+        expect(test_arr2.any?).to eq(test)
+      end
+    end
+    context 'Integers: is identical to #any with integers' do
+      it do
+        test = test_arr1.any? { |n| n.is_a? Integer }
+        expect(test_arr1.my_any?).to eq(test)
+      end
+    end
+    context 'Regex: is identical to #any with regex' do
+      it 'should be true' do
+        test = array_strings.any?(/Ri/)
+        expect(array_strings.my_any?(/Ri/)).to eq(test)
+      end
+    end
+  end
+
