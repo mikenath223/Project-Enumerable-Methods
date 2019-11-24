@@ -27,3 +27,26 @@ RSpec.describe Enumerable do
       end
     end
   end
+
+  describe '#my_each_with_index' do
+    context 'If no block returns to enum like #each' do
+      it do
+        expect(test_arr1.my_each_with_index).to be_an(Enumerator)
+      end
+    end
+  
+    context 'Expect to run a block like #each_with_index' do
+      it do
+        test = test_arr1.each_with_index {|num, ind| num + ind}
+        expect(test_arr1.my_each_with_index {|num, ind| num + ind})
+      end
+    end
+
+    context 'Expect to run a string like #each_with_index' do
+      it do
+        test = test_arr2.each_with_index { |name, ind| "Name: #{name}, Index: #{ind}"}
+        expect(test_arr2.my_each_with_index { |name, ind| "Name: #{name}, Index: #{ind}"}).to eq(test)
+      end
+    end
+  end
+
