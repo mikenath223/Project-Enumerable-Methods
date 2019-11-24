@@ -175,5 +175,11 @@ RSpec.describe Enumerable do
         expect(test_arr1.my_map).to be_an(Enumerator)
       end
     end
+    context 'runs a block like #map' do
+      it do
+        test = test_arr1.map { |n| n * 2 }
+        expect(test_arr1.my_map { |n| n * 2 }).to eq(test)
+      end
+    end
   end
 end
