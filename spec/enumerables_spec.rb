@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './main.rb'
+require_relative '../main.rb'
 
 RSpec.describe Enumerable do
   let(:test_arr1) { [34, 100, 1, 3, 5] }
