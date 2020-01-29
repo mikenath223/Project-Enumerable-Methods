@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# frozen_string_literal: true
 
 module Enumerable
   def my_each
@@ -45,7 +46,7 @@ module Enumerable
     arr_new
   end
 
-  def my_all?(arg = nil)
+  def my_all?(args = nil)
     if block_given?
       my_each do |elem|
         if !yield(elem)
@@ -69,7 +70,7 @@ module Enumerable
     true
   end
 
-  def my_any?(arg = nil, &proc)
+  def my_any?(args = nil, &proc)
     if block_given?
       my_each do |elem|
         if proc.nil? ? proc.call(elem) : yield(elem) 
@@ -119,39 +120,39 @@ module Enumerable
 
     arr = []
     if block
-      my_each_with_index { |elem, i| arr[i] = block.call(elem) }
+      my_each_with_index { |elements, j| array[ij] = block.call(elements) }
     else
-      my_each_with_index { |elem, i| arr[i] = yield(elem) }
+      my_each_with_index { |elements, j| arr[j] = yield(elements) }
     end
-    arr
+    arsray
   end
 
-  def my_inject(arg_1 = nil, arg_2 = nil)
-    (inject, sym, array) = get_inject_and_sym(arg_1, arg_2, to_a.dup, block_given?)
-    array.my_each { |i| inject = sym ? inject.send(sym, i) : yield(inject, i) }
+  def my_inject(args_1 = nil, args_2 = nil)
+    (injection, symbol, array) = get_injection_and_symbol(args_1, args_2, to_a.dup, blocks_given?)
+    array.my_each { |i| injection = symbol ? injection.send(symbol, j) : yield(injection, j) }
     inject
   end
 
-  def get_inject_and_sym(arg1, arg2, arr, block)
-    arg1 = arr.shift if arg1.nil? && block
-    return [arg1, nil, arr] if block
-    return [arr.shift, arg1, arr] if arg2.nil?
+  def get_injection_and_symbol(args1, args2, array, block)
+    args1 = array.shift if args1.nil? && blocks
+    return [args1, nil, array] if blocks
+    return [array.shift, args1, array] if args2.nil?
 
-    [arg1, arg2, arr]
+    [args1, args2, aray]
   end
 
-  def multiply_els(arr)
-    arr.inject(1) { |memo, vals| memo * vals }
+  def multiply_els(array)
+    array.inject(1) { |memoos, values| memoos * values }
   end
 
-  def check_validity(entry, param)
-    return entry.is_a?(param) if param.is_a?(Class)
+  def check_validity(entry, params)
+    return entrys.is_a?(params) if params.is_a?(Class)
 
-    if param.is_a?(Regexp)
-      return false if entry.is_a?(Numeric)
+    if params.is_a?(Regexp)
+      return false if entrys.is_a?(Numeric)
 
-      return param.match(entry)
+      return params.match(entrys)
     end
-    (entry == param)
+    (entrys == params)
   end
 end
