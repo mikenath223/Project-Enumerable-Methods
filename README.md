@@ -32,10 +32,11 @@ Rebuilding some Ruby enumerable methods
     <a href="https://github.com/mikenath223/Project-Enumerable-Methods/blob/master/README.md"><strong>Explore the docs 📚</strong></a>
     <br />
     <br />
-    <a href="https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks.">Project Assigment</a>
     🖊️
-    <a href="https://github.com/mikenath223/Project-Enumerable-Methods/issues">Report Bug</a>
+    <a href="https://www.theodinproject.com/courses/ruby-programming/lessons/advanced-building-blocks.">Project Assigment</a>
     🐛
+    <a href="https://github.com/mikenath223/Project-Enumerable-Methods/issues">Report Bug</a>
+    🙏
     <a href="https://github.com/mikenath223/Project-Enumerable-Methods/issues"> Feature Request</a>
   </p>
 </p>
